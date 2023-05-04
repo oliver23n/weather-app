@@ -10,5 +10,20 @@
 
 let ApiKey = "a550dd03414f16bf9ad75f4675b75d03";
 let city;
-let queryUrl = "https://api.openweathermap.org/data/2.5/weather?q="+city +"&appid="+ApiKey;
+// let queryUrl = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+ApiKey;
+let lat;
+let lon;
+let queryUrlCity = "http://api.openweathermap.org/geo/1.0/direct?q="+city+"&appid="+ApiKey;
 
+
+//get the lon and lat for the input city, then pass it into the weather so we can get the data, after getting the data, get all the required weather data, create an object with the city name lon lat data for the weather store it localy and show it to page
+
+//get the city from input 
+    //inside function 
+    // find lon and lat for that city
+//get the data 
+//pass it into the elements
+function init(){
+    
+}
+init();
