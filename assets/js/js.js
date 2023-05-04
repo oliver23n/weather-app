@@ -1,37 +1,72 @@
-// GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5 - day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-
 let ApiKey = "a550dd03414f16bf9ad75f4675b75d03";
 let today = dayjs();
-
-
-//get the lon and lat for the input city, then pass it into the weather so we can get the data, after getting the data, get all the required weather data, create an object with the city name lon lat data for the weather store it localy and show it to page
-
-//get the city from input 
-    //inside function 
-    // find lon and lat for that city
-//get the data 
-//pass it into the elements
+let cities = [];
 function init(){
+    cities= getLocal();
+    renderHistory();
     $('#searchB').on('click',searchCity);
+    $('#history').on('click','.direct',function(){
+       sendCity($(this).val());
+    }
+    );
 
 }
 //get the city name and pass it to fetch
 function searchCity(){
-    const cityName =  $('#cityInput');
-    if(!cityName.val()){
+    const cityInput = $('#cityInput');
+    const cityName =  cityInput.val();
+
+    if(!cityName){
         alert('ENTER A CITY');
     }else{
+        
         //send city name to find long lat
-        sendCity(cityName.val());
+        sendCity(cityName);
+        //save the city 
+        const city = {
+            name: cityName
+        }
+        cities.push(city);
+        //clear local
+        localStorage.clear();
+        //store in local
+        store(cities);
+        //render on side
+        renderHistory();
+        //clear input value
+        cityInput.val('');
     }
+}
+function renderHistory(){
+    //clear everything
+    $('#history').remove();
+    //get local storage cities
+    let stored = getLocal();
+    //create and append the history
+    const attachHistory = $('#attachHistory');
+    const history = $('<div>')
+    history.attr('id','history');
+    attachHistory.append(history);
+    
+    for(let i = 0; i<stored.length; i++){
+        const cityHistory = $('<button>');
+        cityHistory.text(stored[i].name).val(stored[i].name).addClass('direct customB');
+        history.append(cityHistory);
+    }
+    
+}
+//get local storage
+function getLocal(){
+    stored = localStorage.getItem('history');
+    if(stored){
+        return JSON.parse(stored);
+    }else{
+        return [];
+    }
+}
+//store local storage
+function store(items){
+    localStorage.setItem('history', JSON.stringify(items));
 }
 //function that gets the city input and returns lon and lat
 function sendCity(city){
@@ -73,9 +108,9 @@ function printCurrentW(data){
     $('#currIcon').attr('src',iconUrl);
 }
 }
+//render the forecast
 function printForecast(forecast){
-    console.log(forecast);
-   let j = 0;
+    let j = 0;
 
     for(let i = 0; i<forecast.list.length; i++){
         if(forecast.list[i].dt_txt.includes('12:00:00')){
@@ -94,8 +129,6 @@ function printForecast(forecast){
             j++;
         }
     }
-   
-   
 
 }
 
