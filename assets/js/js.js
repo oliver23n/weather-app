@@ -35,7 +35,7 @@ function searchCity(){
 }
 //function that gets the city input and returns lon and lat
 function sendCity(city){
-    //make api url
+    //make api url from city name
     let queryUrlCity = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + ApiKey;
     //fetch lon and lat
     $.ajax({
@@ -64,13 +64,39 @@ function sendCity(city){
     });
 //render the current weather data to the corresponding html 
 function printCurrentW(data){
-    console.log(data);
     $('#city').text(data.name);
     $('#today').text(today.format('ddd, DD/MM/YYYY'));
+    $('#currTemp').text("Temperature: " + Math.floor(data.main.temp) + " F");
+    $('#currHumid').text("Humidity: " + data.main.humidity + " %");
+    $('#currWspeed').text("Wind Speed: "+ data.wind.speed + " mph");
+    let iconUrl = "http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png";
+    $('#currIcon').attr('src',iconUrl);
 }
 }
 function printForecast(forecast){
     console.log(forecast);
+   let j = 0;
+
+    for(let i = 0; i<forecast.list.length; i++){
+        if(forecast.list[i].dt_txt.includes('12:00:00')){
+            console.log(forecast.list[i].dt_txt);
+            //set date
+            $('#date'+j).text(dayjs(forecast.list[i].dt_txt).format('DD/MM/YYYY'));
+            //set temp
+             $('#temp'+j).text(forecast.list[i].main.temp);
+             //set humidity
+            $('#humid'+j).text(forecast.list[i].main.humidity);
+            //set windspeed
+            $('#wspeed'+j).text(forecast.list[i].wind.speed);
+            //set weather icon
+            let iconSrc = "http://openweathermap.org/img/wn/" + forecast.list[i].weather[0].icon + "@2x.png";
+            $('#icon'+j).attr('src',iconSrc);
+            j++;
+        }
+    }
+   
+   
+
 }
 
 

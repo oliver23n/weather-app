@@ -16,15 +16,15 @@
 <body>
     <nav class="navbar navbar-light bg-light">
         <div class="container d-flex justify-content-center">
-            <h1 class="navbar-brand p-3">Weather Dashboard</h1>
+            <h1 class="navbar-brand">Weather Dashboard</h1>
         </div>
     </nav>
-    <main class="row my-5">
+    <main class="row my-1">
 
         <div class="col-12 col-md-3 p-3">
             <div class="search d-flex flex-column">
 
-                <h3 class="p-2">Search for a City</h3>
+                <h4 class="p-2">Search for a City</h4>
                 <input id="cityInput" class="form-control" type="text" placeholder="New York" aria-label="default input example">
                 <button id="searchB" class="btn btn-primary justify-content-center my-3" type="submit">Search</button>
             </div>
@@ -36,12 +36,13 @@
         </div>
         <div class="col-md-9 col-12">
             <div class="card border-dark rounded mb-3 col-11">
-                <h2 id="city" class="card-header">City name</h2>
+                <h3 id="city" class="card-header">City name</h3>
                 <div class="card-body text-primary">
                     <h5 id="today" class="card-title">todays date</h5>
-                    <p class="card-text">Here goes data for weather</p>
-                    <p class="card-text">weather Data</p>
-                    <p class="card-text">weather Data</p>
+                     <div id="icon"><img id="currIcon" src="" alt="Weather icon"></div>
+                     <p id="currTemp" class="card-text">weather Data</p>
+                    <p id="currHumid" class="card-text">weather Data</p>
+                    <p id="currWspeed" class="card-text">weather Data</p>
 
 
                 </div>
@@ -53,10 +54,11 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <h5 class="card-title">Date</h5>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
+                            <h5 id="date0" class="date card-title">Date</h5>
+                            <div><img id="icon0" src="" alt="Weather icon"></div>
+                            <p id="temp0" class="card-text ">weather Data</p>
+                            <p id="humid0"  class="card-text">weather Data</p>
+                            <p id="wspeed0" class="card-text" >weather Data</p>
                         </div>
                     </div>
                 </div>
@@ -64,10 +66,11 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
+                            <h5 id="date1" class="date card-title">Card title</h5>
+                            <div><img id="icon1" src="" alt="Weather icon"></div>
+                            <p id="temp1" class="card-text ">weather Data</p>
+                            <p id="humid1"  class="card-text">weather Data</p>
+                            <p class="card-text" id="wspeed1">weather Data</p>
                         </div>
                     </div>
                 </div>
@@ -75,10 +78,11 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
+                            <h5 id="date2" class="date card-title">Card title</h5>
+                            <div><img id="icon2" src="" alt="Weather icon"></div>
+                            <p id="temp2" class="card-text ">weather Data</p>
+                            <p id="humid2"  class="card-text">weather Data</p>
+                            <p class="card-text" id="wspeed2">weather Data</p>
                         </div>
                     </div>
                 </div>
@@ -86,10 +90,11 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
+                            <h5 id="date3" class="date card-title">Card title</h5>
+                            <div><img id="icon3" src="" alt="Weather icon"></div>
+                            <p id="temp3" class="card-text ">weather Data</p>
+                            <p id="humid3"  class="card-text">weather Data</p>
+                            <p class="card-text" id="wspeed3">weather Data</p>
                         </div>
                     </div>
                 </div>
@@ -97,10 +102,11 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
-                            <p class="card-text">weather Data</p>
+                            <h5 id="date4" class="date card-title">Card title</h5>
+                            <div><img id="icon4" src="" alt="Weather icon"></div>
+                            <p id="temp4" class="card-text ">weather Data</p>
+                            <p id="humid4" class="card-text">weather Data</p>
+                            <p class="card-text" id="wspeed4">weather Data</p>
                         </div>
                     </div>
                 </div>
