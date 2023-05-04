@@ -9,11 +9,9 @@
 // THEN I am again presented with current and future conditions for that city
 
 let ApiKey = "a550dd03414f16bf9ad75f4675b75d03";
-let city;
 // let queryUrl = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+ApiKey;
 let lat;
 let lon;
-let queryUrlCity = "http://api.openweathermap.org/geo/1.0/direct?q="+city+"&appid="+ApiKey;
 
 
 //get the lon and lat for the input city, then pass it into the weather so we can get the data, after getting the data, get all the required weather data, create an object with the city name lon lat data for the weather store it localy and show it to page
@@ -24,6 +22,39 @@ let queryUrlCity = "http://api.openweathermap.org/geo/1.0/direct?q="+city+"&appi
 //get the data 
 //pass it into the elements
 function init(){
-    
+    $('#searchB').on('click',searchCity);
 }
+//get the city name and pass it to fetch
+function searchCity(){
+    const cityName =  $('#cityInput');
+    if(!cityName.val()){
+        alert('ENTER A CITY');
+    }else{
+        //send city name to find long lat
+        sendCity(cityName.val());
+    }
+}
+//function that gets the city input and returns lon and lat
+function sendCity(city){
+    //make api url
+    let queryUrlCity = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + ApiKey;
+    //fetch lon and lat
+    $.ajax({
+        url: queryUrlCity,
+        method: 'GET',
+    }).then(function (data) {
+        let lat = data[0].lat;
+        let lon = data[0].lon;
+
+    });
+
+
+
+
+
+}
+
+
+
+
 init();
