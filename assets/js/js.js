@@ -9,9 +9,7 @@
 // THEN I am again presented with current and future conditions for that city
 
 let ApiKey = "a550dd03414f16bf9ad75f4675b75d03";
-// let queryUrl = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+ApiKey;
-let lat;
-let lon;
+let today = dayjs();
 
 
 //get the lon and lat for the input city, then pass it into the weather so we can get the data, after getting the data, get all the required weather data, create an object with the city name lon lat data for the weather store it localy and show it to page
@@ -23,6 +21,7 @@ let lon;
 //pass it into the elements
 function init(){
     $('#searchB').on('click',searchCity);
+
 }
 //get the city name and pass it to fetch
 function searchCity(){
@@ -42,16 +41,36 @@ function sendCity(city){
     $.ajax({
         url: queryUrlCity,
         method: 'GET',
-    }).then(function (data) {
-        let lat = data[0].lat;
-        let lon = data[0].lon;
-
+    }).then(function (response) {
+        let lat = response[0].lat;
+        let lon = response[0].lon;
+        // pass in lon and lat into query url for the current weather
+        let queryUrlCurrent = "https://api.openweathermap.org/data/2.5/weather?units=imperial&lat="+lat+"&lon="+lon+"&appid="+ApiKey;
+        //fetch weather data
+        $.ajax({
+            url: queryUrlCurrent,
+            method: 'GET',
+        }).then(function(data){
+            printCurrentW(data);
+        });
+        //pass lon lat into query url for forecast
+        let queryUrlForecast = "https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + lat + "&lon=" + lon + "&appid=" + ApiKey;
+        $.ajax({
+            url:queryUrlForecast,
+            method:'GET',
+        }).then(function(dataforecast){
+            printForecast(dataforecast);
+        })
     });
-
-
-
-
-
+//render the current weather data to the corresponding html 
+function printCurrentW(data){
+    console.log(data);
+    $('#city').text(data.name);
+    $('#today').text(today.format('ddd, DD/MM/YYYY'));
+}
+}
+function printForecast(forecast){
+    console.log(forecast);
 }
 
 
