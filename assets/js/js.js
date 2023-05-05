@@ -62,7 +62,7 @@ function store(items) {
 function sendCity(city) {
 
     //make api url from city name
-    let queryUrlCity = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + ApiKey;
+    let queryUrlCity = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + ApiKey;
     //fetch lon and lat
     $.ajax({
         url: queryUrlCity,
