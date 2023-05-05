@@ -1,9 +1,4 @@
-body{
-    position:fixed;
-    left:0;
-    right:0;
 
-}
 h1{
     font-size: 35px!important;
 }
@@ -13,4 +8,7 @@ h1{
     border-radius: 20px;
     border:solid 2px black;
     margin: 2px 0;
+}
+.hidden{
+    display:none;
 }

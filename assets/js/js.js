@@ -1,41 +1,26 @@
 let ApiKey = "a550dd03414f16bf9ad75f4675b75d03";
 let today = dayjs();
 let cities = [];
+
 function init(){
-    cities= getLocal();
+
+    cities = getLocal();
     renderHistory();
     $('#searchB').on('click',searchCity);
-    $('#history').on('click','.direct',function(){
-       sendCity($(this).val());
+    $('#history').on('click', '.direct', function () {
+        sendCity($(this).val());
     }
     );
-
+   
 }
 //get the city name and pass it to fetch
 function searchCity(){
     const cityInput = $('#cityInput');
     const cityName =  cityInput.val();
-
-    if(!cityName){
-        alert('ENTER A CITY');
-    }else{
-        
         //send city name to find long lat
         sendCity(cityName);
-        //save the city 
-        const city = {
-            name: cityName
-        }
-        cities.push(city);
-        //clear local
-        localStorage.clear();
-        //store in local
-        store(cities);
-        //render on side
-        renderHistory();
-        //clear input value
+        //clear input value for search city
         cityInput.val('');
-    }
 }
 function renderHistory(){
     //clear everything
@@ -70,6 +55,7 @@ function store(items){
 }
 //function that gets the city input and returns lon and lat
 function sendCity(city){
+    $('.displayed').removeClass('hidden');
     //make api url from city name
     let queryUrlCity = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + ApiKey;
     //fetch lon and lat
@@ -99,13 +85,41 @@ function sendCity(city){
     });
 //render the current weather data to the corresponding html 
 function printCurrentW(data){
-    $('#city').text(data.name);
-    $('#today').text(today.format('ddd, DD/MM/YYYY'));
+    //display the city name
+    $('#city').text(data.name).val(data.name);
+    //check if the city already exists in history search
+    let found = false;
+        for(let i =0; i<cities.length; i++){
+            if(cities[i].name == data.name){
+                found = true;
+                break;
+            }
+        }
+        //if it doesnt store it in local storage
+        if (!found){
+            const city = {
+                name: $('#city').val()
+            }
+            cities.push(city);
+            //clear local
+            localStorage.clear();
+            //store in local
+            store(cities);
+        }
+        //render on side
+        renderHistory();
+     
+     $('#today').text(today.format('ddd, DD/MM/YYYY'));
     $('#currTemp').text("Temperature: " + Math.floor(data.main.temp) + " F");
     $('#currHumid').text("Humidity: " + data.main.humidity + " %");
     $('#currWspeed').text("Wind Speed: "+ data.wind.speed + " mph");
     let iconUrl = "http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png";
     $('#currIcon').attr('src',iconUrl);
+
+    $('#history').on('click', '.direct', function () {
+        sendCity($(this).val());
+    }
+    );
 }
 }
 //render the forecast
@@ -114,15 +128,14 @@ function printForecast(forecast){
 
     for(let i = 0; i<forecast.list.length; i++){
         if(forecast.list[i].dt_txt.includes('12:00:00')){
-            console.log(forecast.list[i].dt_txt);
             //set date
             $('#date'+j).text(dayjs(forecast.list[i].dt_txt).format('DD/MM/YYYY'));
             //set temp
-             $('#temp'+j).text(forecast.list[i].main.temp);
+             $('#temp'+j).text(forecast.list[i].main.temp+" F");
              //set humidity
-            $('#humid'+j).text(forecast.list[i].main.humidity);
+            $('#humid'+j).text(forecast.list[i].main.humidity+" %");
             //set windspeed
-            $('#wspeed'+j).text(forecast.list[i].wind.speed);
+            $('#wspeed'+j).text(forecast.list[i].wind.speed+" mph");
             //set weather icon
             let iconSrc = "http://openweathermap.org/img/wn/" + forecast.list[i].weather[0].icon + "@2x.png";
             $('#icon'+j).attr('src',iconSrc);
@@ -131,8 +144,4 @@ function printForecast(forecast){
     }
 
 }
-
-
-
-
 init();
