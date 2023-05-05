@@ -13,7 +13,7 @@ N/A
 Link to the app : https://oliver23n.github.io/weather-app/
 
 
-[Screenshot of App](./assets/images/screenshot.png)
+![Screenshot of App](./assets/images/screenshot.png)
     
 
 ## Credits
