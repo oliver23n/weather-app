@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark">
         <div class="container d-flex justify-content-center">
             <h1 class="navbar-brand">Weather Dashboard</h1>
         </div>
@@ -24,10 +24,10 @@
         <div class="col-12 col-md-3 p-3">
             <div class="search d-flex flex-column">
 
-                <h4 class="p-2">Search for a City</h4>
+                <h4 class="p-2 text-dark">Search for a City</h4>
                 <input id="cityInput" class="form-control" type="text" placeholder="New York"
                     aria-label="default input example">
-                <button id="searchB" class="btn btn-primary justify-content-center my-3" type="submit">Search</button>
+                <button id="searchB" class="btn btn-primary justify-content-center border-dark my-3" type="submit">Search</button>
             </div>
             <div id="attachHistory">
                 <h6>Search History :</h6>
@@ -36,7 +36,7 @@
         <div class="displayed hidden col-md-9 col-12">
             <div class="card border-dark rounded mb-3 col-11">
                 <h3 id="city" class="card-header">City name</h3>
-                <div class="card-body text-primary">
+                <div class="card-body ">
                     <h5 id="today" class="card-title"></h5>
                     <div id="icon"><img id="currIcon" src="" alt="Weather icon"></div>
                     <p id="currTemp" class="card-text"></p>

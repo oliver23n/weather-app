@@ -1,7 +1,10 @@
-
+body{
+    background-color: #6989BF;
+}
 h1{
     font-size: 35px!important;
 }
+
 .customB{
     width:100%;
     padding:4px;
@@ -11,4 +14,17 @@ h1{
 }
 .hidden{
     display:none;
+}
+.card {
+    background-color: lightblue;
+    border:2px solid black;
+    box-shadow:2px 2px 10px black
+}
+.customB:hover{
+    box-shadow: inset 2px 2px 20px black,
+            2px 2px 10px black;
+}
+.btn:hover{
+    box-shadow: inset 5px 5px 30px black,
+            5px 5px 20px black;
 }
